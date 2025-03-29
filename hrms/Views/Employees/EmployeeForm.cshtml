@@ -1,0 +1,45 @@
+﻿@model hrms.Models.Employee
+
+@{
+    ViewBag.Title = "Employee Form";
+}
+
+<h2>Employee Form</h2>
+
+
+@using (Html.BeginForm("EmployeeInsert", "Employees", FormMethod.Post))
+{
+    <table class="table">
+        @Html.HiddenFor(m => m.EmployeeId)
+        <tr>
+            <td>Name</td>
+            <td>@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>@Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Date of Joining</td>
+            <td>@Html.TextBoxFor(m => m.DateOfJoining, new { @class = "form-control", type = "date" })</td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td>@Html.TextBoxFor(m => m.Department, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td>@Html.TextBoxFor(m => m.Salary, new { @class = "form-control", type = "number", step = "0.01" })</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="@ViewBag.BT" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+}
+
+

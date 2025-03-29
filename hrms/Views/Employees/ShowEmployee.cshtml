@@ -1,0 +1,38 @@
+﻿@model hrms.Models.Employee
+
+@{
+    ViewBag.Title = "ShowEmployee";
+}
+
+<h2>ShowEmployee</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date of Joining</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Actions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in ViewBag.Employees)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Email</td>
+                <td>@employee.Phone</td>
+                <td>@employee.DateOfJoining.ToString("yyyy-MM-dd")</td>
+                <td>@employee.Department</td>
+                <td>@employee.Salary</td>
+                <td>@Html.ActionLink("Delete", "DeleteEmployee", new { P = employee.EmployeeId })</td>
+                <td>@Html.ActionLink("Edit", "EmployeeForm", new { P = employee.EmployeeId })</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

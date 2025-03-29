@@ -1,0 +1,67 @@
+﻿@model hrms.Models.Attendance
+
+@{
+    ViewBag.Title = "Mark Attendance";
+}
+
+<h2>Mark Attendance</h2>
+
+@using (Html.BeginForm("MarkAttendance", "Attendance", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <table class="table table-bordered">
+        <tr>
+            <td><strong>Employee</strong></td>
+            <td>
+                @Html.DropDownListFor(m => m.EmployeeId,
+                    ViewBag.Employees as SelectList,
+                    "-- Select Employee --",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmployeeId, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td><strong>Date</strong></td>
+            <td>
+                @Html.TextBoxFor(m => m.Date, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td><strong>Status</strong></td>
+            <td>
+                @Html.DropDownListFor(m => m.Status,
+                new SelectList(new List<string> { "Present", "Absent", "Leave" }),
+                "-- Select --",
+                new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td><strong>Check-In Time</strong></td>
+            <td>
+                @Html.TextBoxFor(m => m.CheckInTime, new { @class = "form-control", type = "time" })
+                @Html.ValidationMessageFor(m => m.CheckInTime, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td><strong>Check-Out Time</strong></td>
+            <td>
+                @Html.TextBoxFor(m => m.CheckOutTime, new { @class = "form-control", type = "time" })
+                @Html.ValidationMessageFor(m => m.CheckOutTime, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><button type="submit" class="btn btn-success">Submit Attendance</button></td>
+        </tr>
+    </table>
+}
+
+
+

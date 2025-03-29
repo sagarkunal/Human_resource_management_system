@@ -1,0 +1,53 @@
+﻿@model IEnumerable<hrms.Models.Attendance>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attendance in Model)
+        {
+            <tr>
+                <td>@attendance.Employee.Name</td>
+                <td>@attendance.Date.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <span class="badge @(attendance.Status == "Present" ? "badge text-bg-success" :
+                     attendance.Status == "Absent" ? "badge text-bg-secondary" : "badge text-bg-danger")">
+                        @attendance.Status
+                    </span>
+                </td>
+                <td>@attendance.CheckInTime</td>
+                <td>@attendance.CheckOutTime</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Attendance", new { id = attendance.AttendanceId }, new { @class = "btn btn-warning" })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "Attendance", new { id = attendance.AttendanceId },
+                        new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you want to delete?');" })
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>

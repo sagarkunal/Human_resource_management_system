@@ -1,0 +1,43 @@
+﻿@model hrms.Models.Attendance
+
+@{
+    ViewBag.Title = "Edit Attendance";
+}
+
+<h2>Edit Attendance</h2>
+
+@using (Html.BeginForm("Edit", "Attendance", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="AttendanceId" value="@Model.AttendanceId" />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeId, "Employee")
+        @Html.DropDownList("EmployeeId", ViewBag.Employees as SelectList, "Select Employee", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Date)
+        @Html.TextBox("Date", Model.Date != DateTime.MinValue ? Model.Date.ToString("yyyy-MM-dd") : "",
+            new { @class = "form-control", type = "date" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status)
+        @Html.DropDownListFor(model => model.Status, new SelectList(new[] { "Present", "Absent", "Leave" }), "Select Status", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckInTime)
+        @Html.TextBoxFor(model => model.CheckInTime, new { @class = "form-control", type = "time" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckOutTime)
+        @Html.TextBoxFor(model => model.CheckOutTime, new { @class = "form-control", type = "time" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="@Url.Action("Index", "Attendance")" class="btn btn-secondary">Cancel</a>
+}

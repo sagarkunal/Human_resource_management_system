@@ -1,0 +1,61 @@
+﻿@model IEnumerable<hrms.Models.Payroll>
+@{
+    ViewBag.Title = "Payroll List";
+}
+
+
+<h2>Payroll</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>Basic Salary</th>
+            <th>Allowances</th>
+            <th>Deductions</th>
+            <th>Net Salary</th>
+            <th>Payment Date</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payroll in Model)
+        {
+            @Html.AntiForgeryToken()
+
+        <tr>
+
+            <td>@payroll.EmployeeId</td>
+            <td>@payroll.Employee.Name</td>
+            <td>@payroll.BasicSalary.ToString("C")</td>
+            <td>@payroll.Allowances.ToString("C")</td>
+            <td>@payroll.Deductions.ToString("C")</td>
+            <td>@payroll.NetSalary.ToString("C")</td>
+            <td>@payroll.PaymentDate.ToString("yyyy-MM-dd")</td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", "Payroll", new { id = payroll.PayrollId }, new { @class = "btn btn-warning btn-sm" })
+
+            </td>
+
+            <td>
+                @using (Html.BeginForm("Delete", "Payroll", new { id = payroll.PayrollId }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                }
+            </td>
+
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<p>
+    @Html.ActionLink("Add New Payroll", "Create", "Payroll", null, new { @class = "btn btn-primary" })
+</p>
