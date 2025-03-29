@@ -1,0 +1,38 @@
+﻿@model User_Registration_Form.Models.tblregistration
+@{
+    ViewBag.Title = "AddLogin";
+ 
+}
+
+<h2>AddLogin</h2>
+
+@using (Html.BeginForm("AddLogin", "Login", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>User Email Id:</td>
+            <td>@Html.TextBoxFor(model => model.remail)</td>
+        </tr>
+
+        <tr>
+            <td>User Password:</td>
+            <td>@Html.PasswordFor(model => model.rpassword)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                @if (ViewBag.msg != null)
+                {
+                    <span style="color: red">@ViewBag.msg</span>
+                } 
+            </td>
+        </tr>
+
+
+    </table>
+
+}

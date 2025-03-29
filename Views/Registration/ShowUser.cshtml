@@ -1,0 +1,46 @@
+﻿@model IEnumerable<User_Registration_Form.Models.RegistrationJoin>
+
+@{
+    ViewBag.Title = "ShowUser";
+}
+<h2>ShowUser</h2>
+
+
+    <table  class="table table-bordered">
+        <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>User Password</th>
+            <th>User Country</th>
+            <th>User State</th>
+            <th>User City</th>
+            <th>User Gender</th>
+            <th>User Hobbies</th>
+            <th>User Images</th>
+            <th></th>
+            <th></th>
+        </tr>
+       @foreach(var a in Model)
+                {
+                    <tr style="height: 40px">
+                        <td>@a.rid</td>
+                        <td>@a.rname</td>
+                        <td>@a.remail</td>
+                        <td>@a.rpassword</td>
+                        <td>@a.rcountry</td>
+                        <td>@a.rstate</td>
+                        <td>@a.rcity</td>
+                        <td>@a.rgender</td>
+                        <td>@a.rhobbies</td>
+                        <td><img src="@Url.Content(a.rimage)" width="100px" height="140px" /></td>
+                        <td>@Html.ActionLink("Delete", "DeleteUser", new {id = a.rid})</td>
+                        <td>@Html.ActionLink("Edit", "AddUser", new {id = a.rid})</td>
+                    </tr>
+                }
+
+
+    </table>
+
+
+

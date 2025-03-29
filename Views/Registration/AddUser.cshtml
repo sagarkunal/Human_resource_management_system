@@ -1,0 +1,109 @@
+﻿@model User_Registration_Form.Models.tblregistration1
+@{
+    ViewBag.Title = "AddUser";
+}
+
+<h2>AddUser</h2>
+
+
+@using (Html.BeginForm("AddUser", "Registration", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <table>
+        @Html.HiddenFor(model=> model.rid)
+        @Html.HiddenFor(model=> model.rimage)
+        <tr>
+            <td>User Name:</td>
+            <td>@Html.TextBoxFor(model => model.rname)</td>
+        </tr>
+        <tr>
+            <td>User Email Id:</td>
+            <td>@Html.TextBoxFor(model => model.remail)</td>
+        </tr>
+        <tr>
+            <td>User Password:</td>
+            <td>@Html.TextBoxFor(model => model.rpassword)</td>
+        </tr>
+        <tr>
+            <td>User Country:</td>
+            <td>@Html.DropDownListFor(model => model.rcountry, new SelectList(Model.lstcountry, "countryid", "countryname"), "--Select--", new {onchange="BindState()"})</td>
+        </tr>
+        <tr>
+            <td>User State:</td>
+            <td>@Html.DropDownListFor(model => model.rstate, new SelectList(Model.lststate, "stateid", "statename"), "--Select--", new { onchange = "BindCity()" })</td>
+        </tr>
+        <tr>
+            <td>User City:</td>
+            <td>@Html.DropDownListFor(model => model.rcity, new SelectList(Model.lstcity, "cityid", "cityname"), "--Select--")</td>
+        </tr>
+        <tr>
+            <td>User Gender:</td>
+            <td>
+                @for(var i=0; i < Model.lstgender.Count; i++)
+                {
+                    @Html.RadioButtonFor(model => model.rgender, Model.lstgender[i].genderid) @Model.lstgender[i].gendername
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>User Hobbies:</td>
+            <td>
+                @for (var i = 0; i < Model.lsthobby1.Count; i++)
+                {
+                    @Html.CheckBoxFor(x => x.lsthobby1[i].ischecked)
+                    @Html.DisplayFor(x => x.lsthobby1[i].hobbyname  )
+                    @Html.HiddenFor(x=> x.lsthobby1[i].hobbyname)
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>User Image:</td>
+            <td><input type="file" name="file" /></td>    
+        </tr>
+        <tr>
+            <td></td>
+            <td><input  type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+}
+
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+    function BindState() {
+        $.ajax({
+            url: '../Registration/GetState',
+            type: 'post',
+            data: { A: $("#rcountry").val()},
+            success: function (data) {
+                $("#rstate").empty();
+                $("#rstate").append($('<option></option>').html("--Select--").val(0));
+                for (var i = 0; i < data.length; i++) {
+                    $("#rstate").append($('<option></option>').html(data[i].statename).val(data[i].stateid));
+                }
+            },
+            error: function () {
+                alert('State Not Bind !!');
+            }
+
+        });
+    }
+
+
+    function BindCity() {
+        $.ajax({
+            url: '../Registration/GetCity',
+            type: 'post',
+            data: { A: $("#rstate").val() },
+            success: function (data) {
+                $("#rcity").empty();
+                $("#rcity").append($('<option></option>').html("--Select--").val(0));
+                for (var i = 0; i < data.length; i++) {
+                    $("#rcity").append($('<option></option>').html(data[i].cityname).val(data[i].cityid));
+                }
+            },
+            error: function () {
+                alert('City Not Bind !!');
+            }
+
+        });
+    }
+</script>

@@ -1,0 +1,41 @@
+﻿@model User_Registration_Form.Models.CPModel
+@{
+    ViewBag.Title = "AddCP";
+}
+
+<h2>AddCP</h2>
+
+@using (Html.BeginForm("AddCP", "CP", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>Current Password</td>
+            <td>@Html.TextAreaFor(x => x.CurrentPassword)</td>
+        </tr>
+
+        <tr>
+            <td>New Password</td>
+            <td>@Html.TextAreaFor(x => x.NewPassword)</td>
+        </tr>
+
+
+        <tr>
+            <td>Confirm New Password</td>
+            <td>@Html.TextAreaFor(x => x.ConfirmNewPassword)</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Change Password" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                @if (ViewBag.msg != null)
+                {
+                    <span style="color: red">@ViewBag.msg</span>
+                }
+            </td>
+        </tr>
+    </table>
+}

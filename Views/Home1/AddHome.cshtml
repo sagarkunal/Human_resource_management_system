@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "AddHome";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>Welcome Home...</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>User Id</th>
+        <th>User Name</th>
+        <th>User Email</th>
+        <th>User Password</th>
+        <th>User Country</th>
+        <th>User State</th>
+        <th>User City</th>
+        <th>User Gender</th>
+        <th>User Hobbies</th>
+        <th>User Images</th>
+
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr style="height: 40px">
+            <td>@a.rid</td>
+            <td>@a.rname</td>
+            <td>@a.remail</td>
+            <td>@a.rpassword</td>
+            <td>@a.rcountry</td>
+            <td>@a.rstate</td>
+            <td>@a.rcity</td>
+            <td>@a.rgender</td>
+            <td>@a.rhobbies</td>
+            <td><img src="@Url.Content(a.rimage)" width="100px" height="140px" /></td>
+          
+        </tr>
+    }
+
+
+</table>
