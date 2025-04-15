@@ -1,1 +1,1 @@
-#The Human Resource Management System (HRMS) is a web-based application developed using ASP.NET MVC and .NET Framework to automate and manage HR-related activities within an organization. This system streamlines employee management, attendance tracking, leave management, payroll processing, and reporting.
+
